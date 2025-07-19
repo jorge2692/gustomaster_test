@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
 import 'package:gusto_master/data/sources/dog_api_service.dart';
+import 'package:gusto_master/presentation/pages/dog_favorite_page.dart';
 import 'package:gusto_master/presentation/widgets/dog_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
   List<DogBreed> dogsList = [];
 
   bool isLoading = true;
@@ -45,19 +44,30 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Gusto Master'),
-      ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: dogsList.length,
-              itemBuilder: (context, index) {
-                return DogCard(dog: dogsList[index]);
+        actions: [
+          IconButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => DogFavoritePage()));
               },
-            ),
-          ),
+              icon: Icon(Icons.favorite))
         ],
       ),
+      body: isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: dogsList.length,
+                    itemBuilder: (context, index) {
+                      return DogCard(dog: dogsList[index]);
+                    },
+                  ),
+                ),
+              ],
+            ),
     );
   }
 }
