@@ -28,16 +28,13 @@ class DogFavoriteCubit extends Cubit<DogFavoriteState> {
       if (dogs.isNotEmpty) {
         return emit(FetchedFavoriteState(dogs));
       }
-      return emptyFavoriteDog();
+      emit(EmptyFavoriteState());
+      return;
     } catch (e) {
       emit(ErrorFavoriteState(e.toString()));
     }
   }
 
-  /// Emits an empty state when no favorite dogs are available.
-  void emptyFavoriteDog() {
-    emit(EmptyFavoriteState());
-  }
 
   /// Deletes a specific favorite dog and refreshes the list.
   ///
