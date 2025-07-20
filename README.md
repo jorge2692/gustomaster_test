@@ -38,7 +38,7 @@ Tools • Dart 3.6.0 • DevTools 2.40.2
 ---
 
 ## 📁 Estructura del proyecto
-
+'''
 lib/
 ├── core/
 │   └── constants.dart                      # Constantes globales
@@ -83,7 +83,7 @@ lib/
 │       └── text_span_widget.dart
 │
 └── main.dart                               # Punto de entrada principal
-
+'''
 ---
 
 ## 🚀 Instalación
