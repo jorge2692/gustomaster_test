@@ -28,10 +28,8 @@ class _DogFavoritePageState extends State<DogFavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        forceMaterialTransparency: true,
+        title: Text('Favoritos', style: Constanst.largeTitle,),
       ),
       body: BlocProvider(
         create: (context)=> cubit,

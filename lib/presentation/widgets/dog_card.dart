@@ -15,9 +15,11 @@ class DogCard extends StatelessWidget {
     final imageUrl = dog.imageUrl;
     return GestureDetector(
       onTap: () async{
-        // Navigator.push(context,
-        //     MaterialPageRoute(builder: (context) => DogDetails(dog: dog)));
-        await Future.delayed(const Duration(seconds: 3));
+        Navigator.pushNamed(
+          context,
+          '/dog_details',
+          arguments: dog,
+        );
       },
       child: Card(
         margin: EdgeInsets.all(10),

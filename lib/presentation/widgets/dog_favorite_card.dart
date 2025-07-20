@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_cubit.dart';
-import 'package:gusto_master/presentation/pages/dog_favorite_details_page.dart';
 
 class DogFavoriteCard extends StatelessWidget {
   const DogFavoriteCard({super.key, required this.dog});
@@ -20,10 +19,11 @@ class DogFavoriteCard extends StatelessWidget {
       },
       child: GestureDetector(
         onTap: () {
-          Navigator.push(
-              context,
-              CupertinoPageRoute(
-                  builder: (context) => DogFavoriteDetailsPage(dog: dog)));
+          Navigator.pushNamed(
+            context,
+            '/prefs/id',
+            arguments: dog,
+          );
         },
         child: Card(
           margin: EdgeInsets.all(10),

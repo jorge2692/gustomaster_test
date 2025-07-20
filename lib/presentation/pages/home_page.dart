@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 import 'package:gusto_master/logic/home_cubit/home_state.dart';
-import 'package:gusto_master/presentation/pages/dog_favorite_page.dart';
 import 'package:gusto_master/presentation/widgets/dog_card.dart';
 import 'package:gusto_master/presentation/widgets/loading_indicator.dart';
 
@@ -46,9 +45,6 @@ class _HomePageState extends State<HomePage> {
       return;
     }
 
-    // If the widget was removed from the tree while the asynchronous platform
-    // message was in flight, we want to discard the reply rather than calling
-    // setState to update our non-existent appearance.
     if (!mounted) {
       return Future.value(null);
     }
@@ -68,10 +64,10 @@ class _HomePageState extends State<HomePage> {
           actions: [
             IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => DogFavoritePage()));
+                  Navigator.pushNamed(
+                    context,
+                    '/prefs',
+                  );
                 },
                 icon: Icon(Icons.favorite))
           ],

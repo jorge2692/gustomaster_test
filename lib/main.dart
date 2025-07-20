@@ -8,6 +8,9 @@ import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/models/weight.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
 import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
+import 'package:gusto_master/presentation/pages/dog_details.dart';
+import 'package:gusto_master/presentation/pages/dog_favorite_details_page.dart';
+import 'package:gusto_master/presentation/pages/dog_favorite_page.dart';
 import 'package:gusto_master/presentation/pages/home_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -34,6 +37,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      routes: {
+        // '/': (context) => HomePage(),
+        '/prefs': (context) => DogFavoritePage(),
+        '/prefs/id': (context) => DogFavoriteDetailsPage(),
+        '/dog_details': (context) => DogDetails(),
+
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
