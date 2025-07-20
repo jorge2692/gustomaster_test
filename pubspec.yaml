@@ -30,6 +30,8 @@ environment:
 dependencies:
   http: ^1.4.0
   flutter_bloc: ^9.1.1
+  hive: ^2.2.3
+  hive_flutter: 1.1.0
   flutter:
     sdk: flutter
 
@@ -38,6 +40,8 @@ dependencies:
   cupertino_icons: ^1.0.8
 
 dev_dependencies:
+  hive_generator: 2.0.0
+  build_runner: 2.4.13
   flutter_test:
     sdk: flutter
 

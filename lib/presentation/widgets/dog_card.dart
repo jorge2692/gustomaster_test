@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
+import 'package:gusto_master/data/sources/dog_local_source.dart';
 import 'package:gusto_master/presentation/pages/dog_details.dart';
 import 'package:gusto_master/presentation/widgets/dog_button_add.dart';
 
@@ -12,9 +13,12 @@ class DogCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final imageUrl = dog.imageUrl;
     return GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => DogDetails(dog: dog)));
+      onTap: () async{
+        // Navigator.push(context,
+        //     MaterialPageRoute(builder: (context) => DogDetails(dog: dog)));
+        DogLocalSource().saveDogs(dog);
+        await Future.delayed(const Duration(seconds: 3));
+        DogLocalSource().printInfo();
       },
       child: Card(
         margin: EdgeInsets.all(10),
