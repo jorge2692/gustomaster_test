@@ -12,10 +12,17 @@ class DogFavoriteCubit extends Cubit<DogFavoriteState>{
     try {
       emit(LoadingFavoriteState());
       final dogs = await _dogRepository.getFavoriteDogs();
-      emit(FetchedFavoriteState(dogs));
+      if(dogs.isNotEmpty){
+        return emit(FetchedFavoriteState(dogs));
+      }
+      return emptyFavoriteDog();
     } catch (e) {
       emit(ErrorFavoriteState(e.toString()));
     }
+  }
+
+  void emptyFavoriteDog() {
+    emit(EmptyFavoriteState());
   }
 
   Future<void> deleteFavoriteDog(UserFavoriteDog dog) async{

@@ -20,7 +20,6 @@ class _DogFavoritePageState extends State<DogFavoritePage> {
 
   @override
   void initState() {
-    // context.read<DogFavoriteCubit>().fetchFavoriteDogs();
   cubit.fetchFavoriteDogs();
     super.initState();
   }

@@ -1,3 +1,4 @@
+import 'package:connectivity_plus_platform_interface/src/enums.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
@@ -20,5 +21,13 @@ class HomeCubit extends Cubit<HomeState> {
 
   void saveFavoriteDog(UserFavoriteDog dog){
     _dogRepository.saveFavoriteDogs(dog);
+  }
+
+  void changedInternetStatus(List<ConnectivityResult> connectionStatus){
+    if(connectionStatus.first.name ==  'none'){
+      emit(ErrorState('No Hay Internet'));
+      return;
+    }
+    fetchDogs();
   }
 }
