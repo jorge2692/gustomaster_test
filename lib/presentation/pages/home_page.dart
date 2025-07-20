@@ -19,7 +19,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<ConnectivityResult> _connectionStatus = [ConnectivityResult.none];
   final Connectivity _connectivity = Connectivity();
   late StreamSubscription<List<ConnectivityResult>> _connectivitySubscription;
 
@@ -58,8 +57,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> _updateConnectionStatus(List<ConnectivityResult> result) async {
-    _connectionStatus = result;
-    context.read<HomeCubit>().changedInternetStatus(_connectionStatus);
+    context.read<HomeCubit>().changedInternetStatus(result);
   }
 
   @override

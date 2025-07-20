@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
 import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_cubit.dart';
@@ -27,7 +28,11 @@ class _DogFavoritePageState extends State<DogFavoritePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        forceMaterialTransparency: true,
+      ),
       body: BlocProvider(
         create: (context)=> cubit,
         child: BlocBuilder<DogFavoriteCubit, DogFavoriteState>(
@@ -57,7 +62,22 @@ class _DogFavoritePageState extends State<DogFavoritePage> {
             }
             if(state is EmptyFavoriteState){
               return Center(
-                child: Text('VACIO PERRO'),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                        margin: EdgeInsets.only(
+                            top: 0
+                        ),
+                        height: 200,
+                        width: 200,
+                        child: const Icon(
+                          Icons.pets_outlined,
+                          size: 150,
+                        )),
+                    Text('No hay Favoritos', style: Constanst.mediumTitle,)
+                  ],
+                ),
               );
             }
             return SizedBox.shrink();
