@@ -28,6 +28,18 @@ class DogFavoriteDetailsPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
+        leading: Container(
+          margin: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            shape: BoxShape.circle,
+          ),
+          child: IconButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back)),
+        ),
         backgroundColor: Colors.transparent,
       ),
       body: Column(
@@ -58,7 +70,7 @@ class DogFavoriteDetailsPage extends StatelessWidget {
               children: [
                 // Custom favorite name
                 Text(dog!.name, style: Constanst.largeTitle),
-
+                SizedBox(height: 10,),
                 // Summary info row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

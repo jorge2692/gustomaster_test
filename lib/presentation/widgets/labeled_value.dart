@@ -32,7 +32,7 @@ class LabeledValue extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text(title, style: Constanst.mediumTitle),
+          Text(title, style: Constanst.mediumTitle, textAlign: TextAlign.center, ),
           const SizedBox(height: 10),
           Text(description, style: Constanst.mediumText),
         ],
