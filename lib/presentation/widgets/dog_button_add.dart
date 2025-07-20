@@ -25,12 +25,14 @@ class DogButtonAdd extends StatelessWidget {
     );
   }
   Future<void> _dialogBuilder(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Nombre para tu amigo'),
-          content: const TextField(
+          content: TextField(
+            controller: _controller,
             autofocus: true,
             decoration: InputDecoration(hintText: 'Nombre'),
           ),
@@ -46,7 +48,10 @@ class DogButtonAdd extends StatelessWidget {
               style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: const Text('Guardar'),
               onPressed: () {
-                callback('dog');
+                final nombre = _controller.text.trim();
+                if (nombre.isNotEmpty) {
+                  callback(nombre);
+                }
                 Navigator.of(context).pop();
               },
             ),

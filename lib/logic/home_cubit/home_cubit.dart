@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
 import 'package:gusto_master/logic/home_cubit/home_state.dart';
 
@@ -18,7 +19,7 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void saveFavoriteDog(DogBreed dog){
+  void saveFavoriteDog(UserFavoriteDog dog){
     _dogRepository.saveFavoriteDogs(dog);
   }
 }

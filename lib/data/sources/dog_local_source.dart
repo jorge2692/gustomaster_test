@@ -1,28 +1,16 @@
 import 'package:gusto_master/data/models/dog_breed.dart';
-import 'package:gusto_master/data/models/local/local_dog.dart';
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:hive/hive.dart';
 
 class DogLocalSource{
-  Box<LocalDog> box = Hive.box<LocalDog>('test');
-  void saveDogs(DogBreed dog){
+  Box<UserFavoriteDog> box = Hive.box<UserFavoriteDog>('test');
+  void saveDogs(UserFavoriteDog dog){
     // var dogExist = box.containsKey(dog.id);
     // if(dogExist){
     //   print('Mi Perro: este perro existe');
     //   return;
     // }
-    box.add(LocalDog(
-        id: dog.id,
-        name: dog.name,
-        bredFor: dog.bredFor,
-        breedGroup: dog.breedGroup,
-        lifeSpan: dog.lifeSpan,
-        temperament: dog.temperament,
-        origin: dog.origin,
-        imageUrl: dog.imageUrl,
-        // height: dog.height,
-        // weight: dog.weight
-      ),
-    );
+    box.add(dog);
   }
   
   void printInfo(){
@@ -30,11 +18,11 @@ class DogLocalSource{
     info.forEach((action) => print(action));
   }
 
-  List<LocalDog> getFavoriteDogs(){
+  List<UserFavoriteDog> getFavoriteDogs(){
     return box.values.toList();
   }
 
-  Future<void> deleteDog(LocalDog dog) async{
+  Future<void> deleteDog(UserFavoriteDog dog) async{
     await box.delete(dog.key);
   }
   

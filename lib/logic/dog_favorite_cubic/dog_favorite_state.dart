@@ -1,4 +1,5 @@
-import 'package:gusto_master/data/models/local/local_dog.dart';
+
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
 
 abstract class DogFavoriteState{
 }
@@ -6,7 +7,7 @@ abstract class DogFavoriteState{
 class LoadingFavoriteState extends DogFavoriteState{}
 
 class FetchedFavoriteState extends DogFavoriteState{
-  final List<LocalDog> localDogs;
+  final List<UserFavoriteDog> localDogs;
   FetchedFavoriteState(this.localDogs);
 }
 

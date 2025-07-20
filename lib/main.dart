@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gusto_master/data/models/local/local_dog.dart';
+import 'package:gusto_master/data/models/dog_breed.dart';
+import 'package:gusto_master/data/models/height.dart';
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
+import 'package:gusto_master/data/models/weight.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
 import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 import 'package:gusto_master/presentation/pages/home_page.dart';
@@ -13,8 +16,11 @@ void main() async{
     [DeviceOrientation.portraitUp],
   );
   await Hive.initFlutter();
-  Hive.registerAdapter(LocalDogAdapter());
-  await Hive.openBox<LocalDog>('test');
+  Hive.registerAdapter(UserFavoriteDogAdapter());
+  Hive.registerAdapter(DogBreedAdapter());
+  Hive.registerAdapter(WeightAdapter());
+  Hive.registerAdapter(HeightAdapter());
+  await Hive.openBox<UserFavoriteDog>('test');
 
   runApp(const MyApp());
 }

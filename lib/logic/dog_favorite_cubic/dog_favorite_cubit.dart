@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gusto_master/data/models/dog_breed.dart';
-import 'package:gusto_master/data/models/local/local_dog.dart';
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
 import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_state.dart';
 
@@ -19,7 +18,7 @@ class DogFavoriteCubit extends Cubit<DogFavoriteState>{
     }
   }
 
-  Future<void> deleteFavoriteDog(LocalDog dog) async{
+  Future<void> deleteFavoriteDog(UserFavoriteDog dog) async{
     emit(LoadingFavoriteState());
     await _dogRepository.deleteFavoriteDogs(dog);
     fetchFavoriteDogs();

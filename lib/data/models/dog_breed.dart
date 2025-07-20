@@ -1,16 +1,30 @@
 import 'package:gusto_master/data/models/height.dart';
 import 'package:gusto_master/data/models/weight.dart';
+import 'package:hive/hive.dart';
 
-class DogBreed {
+part 'dog_breed.g.dart';
+
+@HiveType(typeId: 0)
+class DogBreed extends HiveObject{
+  @HiveField(0)
   final int id;
+  @HiveField(1)
   final String name;
+  @HiveField(2)
   final String bredFor;
+  @HiveField(3)
   final String breedGroup;
+  @HiveField(4)
   final String lifeSpan;
+  @HiveField(5)
   final String temperament;
+  @HiveField(6)
   final String origin;
+  @HiveField(7)
   final String imageUrl;
+  @HiveField(8)
   final Height height;
+  @HiveField(9)
   final Weight weight;
 
 

@@ -1,8 +1,14 @@
 import 'dart:convert';
 import 'package:gusto_master/data/models/dog_breed.dart';
+import 'package:hive/hive.dart';
 
-class UserFavoriteDog {
+part 'user_favorite_dog.g.dart';
+
+@HiveType(typeId: 2)
+class UserFavoriteDog extends HiveObject{
+  @HiveField(0)
   final String name;
+  @HiveField(1)
   final DogBreed dogBreed;
 
   UserFavoriteDog({

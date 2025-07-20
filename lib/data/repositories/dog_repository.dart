@@ -1,5 +1,5 @@
 import 'package:gusto_master/data/models/dog_breed.dart';
-import 'package:gusto_master/data/models/local/local_dog.dart';
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/sources/dog_api_source.dart';
 import 'dart:async';
 
@@ -20,7 +20,7 @@ class DogRepository {
     }
   }
 
-  Future<List<LocalDog>> getFavoriteDogs() async {
+  Future<List<UserFavoriteDog>> getFavoriteDogs() async {
     try {
       final breeds = await local.getFavoriteDogs();
       return breeds;
@@ -30,11 +30,11 @@ class DogRepository {
     }
   }
 
-  void saveFavoriteDogs(DogBreed dog){
+  void saveFavoriteDogs(UserFavoriteDog dog){
     local.saveDogs(dog);
   }
 
-  Future<void> deleteFavoriteDogs(LocalDog dog)async{
+  Future<void> deleteFavoriteDogs(UserFavoriteDog dog)async{
     await local.deleteDog(dog);
   }
 }

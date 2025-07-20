@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
+import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/sources/dog_local_source.dart';
 import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 import 'package:gusto_master/presentation/widgets/dog_button_add.dart';
@@ -51,7 +52,7 @@ class DogCard extends StatelessWidget {
                         Expanded(child: SizedBox()),
                         DogButtonAdd(
                           callback: (data){
-                            context.read<HomeCubit>().saveFavoriteDog(dog);
+                            context.read<HomeCubit>().saveFavoriteDog(UserFavoriteDog(name: data, dogBreed: dog));
                           },
                         ),
                       ],
