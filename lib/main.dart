@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/data/models/local/local_dog.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
-import 'package:gusto_master/logic/preference_cubit/preference_cubit.dart';
+import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 import 'package:gusto_master/presentation/pages/home_page.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: BlocProvider(
-        create: (context) => PreferenceCubit(DogRepository()),
+        create: (context) => HomeCubit(DogRepository()),
         child: const HomePage(),
       ),
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gusto_master/logic/preference_cubit/preference_cubit.dart';
-import 'package:gusto_master/logic/preference_cubit/preference_state.dart';
+import 'package:gusto_master/data/sources/dog_local_source.dart';
+import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
+import 'package:gusto_master/logic/home_cubit/home_state.dart';
 import 'package:gusto_master/presentation/pages/dog_favorite_page.dart';
 import 'package:gusto_master/presentation/widgets/dog_card.dart';
 import 'package:gusto_master/presentation/widgets/loading_indicator.dart';
@@ -17,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    context.read<PreferenceCubit>().fetchDogs();
+    context.read<HomeCubit>().fetchDogs();
   }
 
   Widget build(BuildContext context) {
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.favorite))
         ],
       ),
-      body: BlocBuilder<PreferenceCubit, HomeState>(builder: (context, state) {
+      body: BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
         if (state is LoadingState) {
           return LoadingIndicator();
         }

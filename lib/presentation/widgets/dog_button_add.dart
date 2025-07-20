@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gusto_master/data/models/dog_breed.dart';
+import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 
 class DogButtonAdd extends StatelessWidget {
-  const DogButtonAdd({super.key});
+  const DogButtonAdd({super.key, required this.callback});
+  final Function (String) callback;
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +18,7 @@ class DogButtonAdd extends StatelessWidget {
         color: Colors.white,
         onPressed: (){
           _dialogBuilder(context);
+
         },
         icon: Icon(Icons.add),
       ),
@@ -41,6 +46,7 @@ class DogButtonAdd extends StatelessWidget {
               style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: const Text('Guardar'),
               onPressed: () {
+                callback('dog');
                 Navigator.of(context).pop();
               },
             ),

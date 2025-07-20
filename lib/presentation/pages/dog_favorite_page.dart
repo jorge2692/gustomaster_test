@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
 import 'package:gusto_master/data/models/height.dart';
 import 'package:gusto_master/data/models/user_favorite_dog.dart';
 import 'package:gusto_master/data/models/weight.dart';
+import 'package:gusto_master/data/repositories/dog_repository.dart';
+import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_cubit.dart';
+import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_state.dart';
 import 'package:gusto_master/presentation/widgets/dog_favorite_card.dart';
+import 'package:gusto_master/presentation/widgets/loading_indicator.dart';
 
 class DogFavoritePage extends StatefulWidget {
   const DogFavoritePage({super.key});
@@ -14,70 +19,54 @@ class DogFavoritePage extends StatefulWidget {
 
 class _DogFavoritePageState extends State<DogFavoritePage> {
   List<UserFavoriteDog> dogsList = [];
+  final DogFavoriteCubit cubit = DogFavoriteCubit(DogRepository());
 
-  List<UserFavoriteDog> mockFavoriteDogs = [
-    UserFavoriteDog(
-      name: 'Max',
-      dogBreed: DogBreed(
-        id: 1,
-        name: 'Affenpinscher',
-        bredFor: 'Small rodent hunting, lapdog',
-        breedGroup: 'Toy',
-        lifeSpan: '10 - 12 years',
-        temperament: 'Stubborn, Curious, Playful',
-        origin: 'Germany, France',
-        imageUrl: 'https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg',
-        height: Height(imperial: '9 - 11.5', metric: '23 - 29'),
-        weight: Weight(imperial: '6 - 13', metric: '3 - 6'),
-      ),
-    ),
-    UserFavoriteDog(
-      name: 'Luna',
-      dogBreed: DogBreed(
-        id: 2,
-        name: 'Afghan Hound',
-        bredFor: 'Coursing and hunting',
-        breedGroup: 'Hound',
-        lifeSpan: '10 - 13 years',
-        temperament: 'Aloof, Clownish, Dignified',
-        origin: 'Afghanistan, Iran, Pakistan',
-        imageUrl: 'https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg',
-        height: Height(imperial: '25 - 27', metric: '64 - 69'),
-        weight: Weight(imperial: '50 - 60', metric: '23 - 27'),
-      ),
-    ),
-    UserFavoriteDog(
-      name: 'Rocky',
-      dogBreed: DogBreed(
-        id: 3,
-        name: 'Akita',
-        bredFor: 'Hunting bears',
-        breedGroup: 'Working',
-        lifeSpan: '10 - 14 years',
-        temperament: 'Docile, Alert, Responsive',
-        origin: 'Japan',
-        imageUrl: 'https://cdn2.thedogapi.com/images/BFRYBufpm.jpg',
-        height: Height(imperial: '24 - 28', metric: '61 - 71'),
-        weight: Weight(imperial: '65 - 115', metric: '29 - 52'),
-      ),
-    ),
-  ];
+  @override
+  void initState() {
+    // context.read<DogFavoriteCubit>().fetchFavoriteDogs();
+  cubit.fetchFavoriteDogs();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: mockFavoriteDogs.length,
-              itemBuilder: (context, index) {
-                return DogFavoriteCard(dog: mockFavoriteDogs[index]);
-              },
-            ),
-          ),
-        ],
+      body: BlocProvider(
+        create: (context)=> cubit,
+        child: BlocBuilder<DogFavoriteCubit, DogFavoriteState>(
+          bloc: cubit,
+          builder: (context, state) {
+            if(state is LoadingFavoriteState){
+              return LoadingIndicator();
+            }
+            if(state is ErrorFavoriteState){
+              return Center(
+                child: Text(state.message),
+              );
+            }
+            if (state is FetchedFavoriteState){
+              return Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: state.localDogs.length,
+                      itemBuilder: (context, index) {
+                        return DogFavoriteCard(dog: state.localDogs[index]);
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }
+            if(state is EmptyFavoriteState){
+              return Center(
+                child: Text('VACIO PERRO'),
+              );
+            }
+            return SizedBox.shrink();
+          }
+        ),
       ),
     );
   }

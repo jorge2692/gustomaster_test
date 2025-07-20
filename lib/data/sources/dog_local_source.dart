@@ -5,11 +5,11 @@ import 'package:hive/hive.dart';
 class DogLocalSource{
   Box<LocalDog> box = Hive.box<LocalDog>('test');
   void saveDogs(DogBreed dog){
-    var dogExist = box.containsKey(dog.id);
-    if(dogExist){
-      print('Mi Perro: este perro existe');
-      return;
-    }
+    // var dogExist = box.containsKey(dog.id);
+    // if(dogExist){
+    //   print('Mi Perro: este perro existe');
+    //   return;
+    // }
     box.add(LocalDog(
         id: dog.id,
         name: dog.name,
@@ -28,6 +28,14 @@ class DogLocalSource{
   void printInfo(){
     var info = box.values.toList();
     info.forEach((action) => print(action));
+  }
+
+  List<LocalDog> getFavoriteDogs(){
+    return box.values.toList();
+  }
+
+  Future<void> deleteDog(LocalDog dog) async{
+    await box.delete(dog.key);
   }
   
 }
