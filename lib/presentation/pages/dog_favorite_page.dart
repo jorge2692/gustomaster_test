@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gusto_master/data/models/dog_breed.dart';
-import 'package:gusto_master/data/models/height.dart';
 import 'package:gusto_master/data/models/user_favorite_dog.dart';
-import 'package:gusto_master/data/models/weight.dart';
 import 'package:gusto_master/data/repositories/dog_repository.dart';
 import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_cubit.dart';
 import 'package:gusto_master/logic/dog_favorite_cubic/dog_favorite_state.dart';

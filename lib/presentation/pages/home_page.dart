@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gusto_master/data/sources/dog_local_source.dart';
 import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 import 'package:gusto_master/logic/home_cubit/home_state.dart';
 import 'package:gusto_master/presentation/pages/dog_favorite_page.dart';
@@ -21,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     context.read<HomeCubit>().fetchDogs();
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

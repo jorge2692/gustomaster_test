@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gusto_master/data/models/dog_breed.dart';
-import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 
 class DogButtonAdd extends StatelessWidget {
   const DogButtonAdd({super.key, required this.callback});
@@ -25,14 +22,14 @@ class DogButtonAdd extends StatelessWidget {
     );
   }
   Future<void> _dialogBuilder(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
     return showDialog<void>(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Nombre para tu amigo'),
           content: TextField(
-            controller: _controller,
+            controller: controller,
             autofocus: true,
             decoration: InputDecoration(hintText: 'Nombre'),
           ),
@@ -48,7 +45,7 @@ class DogButtonAdd extends StatelessWidget {
               style: TextButton.styleFrom(textStyle: Theme.of(context).textTheme.labelLarge),
               child: const Text('Guardar'),
               onPressed: () {
-                final nombre = _controller.text.trim();
+                final nombre = controller.text.trim();
                 if (nombre.isNotEmpty) {
                   callback(nombre);
                 }

@@ -3,12 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
 import 'package:gusto_master/data/models/user_favorite_dog.dart';
-import 'package:gusto_master/data/sources/dog_local_source.dart';
 import 'package:gusto_master/logic/home_cubit/home_cubit.dart';
 import 'package:gusto_master/presentation/widgets/dog_button_add.dart';
 
 class DogCard extends StatelessWidget {
-  DogCard({super.key, required this.dog});
+  const DogCard({super.key, required this.dog});
   final DogBreed dog;
 
   @override
@@ -19,7 +18,6 @@ class DogCard extends StatelessWidget {
         // Navigator.push(context,
         //     MaterialPageRoute(builder: (context) => DogDetails(dog: dog)));
         await Future.delayed(const Duration(seconds: 3));
-        DogLocalSource().printInfo();
       },
       child: Card(
         margin: EdgeInsets.all(10),

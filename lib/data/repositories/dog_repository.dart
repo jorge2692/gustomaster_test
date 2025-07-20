@@ -15,7 +15,6 @@ class DogRepository {
       final breeds = await api.fetchBreeds();
       return breeds;
     } catch (e) {
-      print('Error: $e');
       return [];
     }
   }
@@ -25,7 +24,6 @@ class DogRepository {
       final breeds = await local.getFavoriteDogs();
       return breeds;
     } catch (e) {
-      print('Error: $e');
       return [];
     }
   }
