@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gusto_master/data/models/dog_breed.dart';
-import 'package:gusto_master/data/sources/dog_api_service.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gusto_master/logic/preference_cubit/preference_cubit.dart';
+import 'package:gusto_master/logic/preference_cubit/preference_state.dart';
 import 'package:gusto_master/presentation/pages/dog_favorite_page.dart';
 import 'package:gusto_master/presentation/widgets/dog_card.dart';
+import 'package:gusto_master/presentation/widgets/loading_indicator.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -12,62 +14,53 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<DogBreed> dogsList = [];
-
-  bool isLoading = true;
-
   @override
   void initState() {
     super.initState();
-    proofService().then((breeds) {
-      setState(() {
-        dogsList = breeds;
-        isLoading = false;
-      });
-    });
+    context.read<PreferenceCubit>().fetchDogs();
   }
 
-  Future<List<DogBreed>> proofService() async {
-    final api = DogApiService();
-
-    try {
-      final breeds = await api.fetchBreeds();
-      return breeds;
-    } catch (e) {
-      print('Error: $e');
-      return [];
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Gusto Master'),
+        title: const Text('Gusto Master'),
         actions: [
           IconButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => DogFavoritePage()));
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DogFavoritePage()));
               },
               icon: Icon(Icons.favorite))
         ],
       ),
-      body: isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: dogsList.length,
-                    itemBuilder: (context, index) {
-                      return DogCard(dog: dogsList[index]);
-                    },
-                  ),
+      body: BlocBuilder<PreferenceCubit, HomeState>(builder: (context, state) {
+        if (state is LoadingState) {
+          return LoadingIndicator();
+        }
+        if (state is FetchDataState) {
+          return Column(
+            children: [
+              Expanded(
+                child: ListView.builder(
+                  itemCount: state.dogs.length,
+                  itemBuilder: (context, index) {
+                    return DogCard(dog: state.dogs[index]);
+                  },
                 ),
-              ],
+              ),
+            ],
+          );
+        }
+        if (state is ErrorState) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Text('Error ${state.message}')],
             ),
+          );
+        }
+        return const SizedBox.shrink();
+      }),
     );
   }
 }

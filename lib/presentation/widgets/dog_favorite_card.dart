@@ -11,8 +11,11 @@ class DogFavoriteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final imageUrl = dog.dogBreed.imageUrl;
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DogFavoriteDetailsPage(dog: dog)));
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DogFavoriteDetailsPage(dog: dog)));
       },
       child: Card(
         margin: EdgeInsets.all(10),
@@ -29,10 +32,15 @@ class DogFavoriteCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name: ${dog.name}', style: Constanst.mediumTitle,),
-                    Text('Proposito: ${dog.dogBreed.bredFor}',
+                    Text(
+                      'Name: ${dog.name}',
+                      style: Constanst.mediumTitle,
+                    ),
+                    Text(
+                      'Proposito: ${dog.dogBreed.bredFor}',
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 1,),
+                      maxLines: 1,
+                    ),
                     Text('Tipo de raza: ${dog.dogBreed.breedGroup}'),
                     Text('Tiempo de vida: ${dog.dogBreed.lifeSpan}'),
                     Row(

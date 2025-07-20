@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gusto_master/core/constants.dart';
 import 'package:gusto_master/data/models/dog_breed.dart';
@@ -9,13 +8,13 @@ class DogCard extends StatelessWidget {
   DogCard({super.key, required this.dog});
   final DogBreed dog;
 
-
   @override
   Widget build(BuildContext context) {
     final imageUrl = dog.imageUrl;
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => DogDetails(dog: dog)));
+      onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => DogDetails(dog: dog)));
       },
       child: Card(
         margin: EdgeInsets.all(10),
@@ -32,10 +31,15 @@ class DogCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Name: ${dog.name}', style: Constanst.mediumTitle,),
-                    Text('Proposito: ${dog.bredFor}',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,),
+                    Text(
+                      'Name: ${dog.name}',
+                      style: Constanst.mediumTitle,
+                    ),
+                    Text(
+                      'Proposito: ${dog.bredFor}',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
                     Text('Tipo de raza: ${dog.breedGroup}'),
                     Text('Tiempo de vida: ${dog.lifeSpan}'),
                     Row(

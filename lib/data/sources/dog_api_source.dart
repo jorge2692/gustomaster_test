@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:gusto_master/data/models/dog_breed.dart';
 import 'package:http/http.dart' as http;
 
-class DogApiService{
+class DogApiSource {
   final String baseUrl = 'https://api.thedogapi.com/v1';
 
   Future<List<DogBreed>> fetchBreeds() async {

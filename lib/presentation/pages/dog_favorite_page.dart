@@ -63,15 +63,10 @@ class _DogFavoritePageState extends State<DogFavoritePage> {
     ),
   ];
 
-
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      ),
+      appBar: AppBar(),
       body: Column(
         children: [
           Expanded(
